@@ -6,7 +6,6 @@ $(document).ready(function () {
     // Close the modal when close button is clicked
     $("#closeModal").on("click", function () {
         $("#welcomeModal").hide();
-        // Connect to server or run your connection function here after modal is closed
     });
 
     const terminal = $('#terminal');
