@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUD Telnet Client</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="top-bar" class="flex-container">
+    <span id="player-name"></span>
+    <span id="room-name"></span>
+    <div id="directions"></div>
+</div>
+<div id="terminal"></div>
+<div id="input-container">
+    <input type="text" id="input" placeholder="Type your command here...">
+    <div id="hamburger-menu">
+        ☰
+        <div id="popover" class="hidden">
+            <div id="font-size-control" style="display: flex; justify-content: space-between; align-items: center;">
+                <button id="decrease-font">-</button>
+                <span id="font-size-display">10</span>
+                <button id="increase-font">+</button>
+            </div>
+            <button id="connect-btn">CONNECT</button>
+            <button id="disconnect-btn">DISCONNECT</button>
+            <button id="reconnect-btn">RECONNECT</button>
+            <button id="commands-btn">COMMANDS</button>
+            <div id="commands-popover" class="hidden">
+                <button class="command-btn">say</button>
+                <button class="command-btn">yell</button>
+                <button class="command-btn">shout</button>
+                <button class="command-btn">look</button>
+<!--                <button class="command-btn">drop</button>-->
+<!--                <button class="command-btn">attack</button>-->
+<!--                <button class="command-btn">flee</button>-->
+<!--                <button class="command-btn">help</button>-->
+<!--                <button class="command-btn">who</button>-->
+<!--                <button class="command-btn">quit</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="input-modal" class="hidden">
+    <div class="modal-content">
+        <input type="text" id="modal-input" placeholder="Type your message...">
+    </div>
+</div>
+<div id="welcomeModal" class="modal">
+    <div class="welcome-modal-content">
+        <h2>Welcome to Astralen</h2>
+        <p>We hope you have a great time playing. Please note that to ensure smooth performance, lines will be cleared after 2000 messages. This is to maintain a cleaner and faster experience for you. Happy exploring!</p>
+        <button id="closeModal">Close</button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ansi_up@4.0.4/ansi_up.min.js"></script>
+<script src="telnet-client.js"></script>
+</body>
+</html>
