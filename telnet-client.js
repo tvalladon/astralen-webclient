@@ -11,7 +11,8 @@ $(document).ready(function () {
     const terminal = $('#terminal');
     const input = $('#input');
     const playerNameEl = $('#player-name');
-    const directionsEl = $('#directions');
+    const exitsEl = $('#exits');
+    const roomPropsEl = $('#room-props');
     const ansi_up = new AnsiUp();
 
     const hamburgerMenu = $('#hamburger-menu');
@@ -120,19 +121,50 @@ $(document).ready(function () {
         const roomName = _.get(data.match(/\{\s*(.+?)\s*\}/), '[1]', null);
         if (roomName) {
             $('#room-name').text(roomName);
+            roomPropsEl.empty();  // clear past props
         }
 
+        // Logic for finding and handling room props
+        const props = _.uniq(
+            _.map((stripAnsi(data).match(/\[:(.*?):]/g) || []), prop => prop.slice(2, -2))
+        );
+
+        if (props.length > 0) {
+            roomPropsEl.empty();  // clear past props
+            _.each(props, prop => {
+                const propEl = $(`<a href="#" class="prop-link">${prop}</a>`);
+                propEl.on('click', function (e) {
+                    e.preventDefault();
+                    const command = `look ${prop}`;
+                    input.val(command).trigger($.Event('keypress', {key: 'Enter'}));
+                });
+                roomPropsEl.append(propEl).append("&nbsp;");
+            });
+        }
+
+        // Logic for finding and handling exits
         const exits = _.get(data.match(/Exits: (.*)/), '[1]', null);
         if (exits) {
             const directions = _.map(exits.match(/\[(.*?)\]/g), dir => dir.slice(1, -1));
-            directionsEl.html(_.map(directions.sort(), dir => `<a href="#" class="direction-link">${dir}</a>`).join(', '));
-
-            $('.direction-link').on('click', function (e) {
+            exitsEl.html(_.map(directions.sort(), dir => `<a href="#" class="exit-link">${dir}</a>`).join('&nbsp;'));
+            $('.exit-link').on('click', function (e) {
                 e.preventDefault();
                 const command = $(this).text();
                 input.val(command).trigger($.Event('keypress', {key: 'Enter'}));
             });
         }
+
+        // const exits = _.get(data.match(/Exits: (.*)/), '[1]', null);
+        // if (exits) {
+        //     const directions = _.map(exits.match(/\[(.*?)\]/g), dir => dir.slice(1, -1));
+        //     directionsEl.html(_.map(directions.sort(), dir => `<a href="#" class="direction-link">${dir}</a>`).join(', '));
+        //
+        //     $('.direction-link').on('click', function (e) {
+        //         e.preventDefault();
+        //         const command = $(this).text();
+        //         input.val(command).trigger($.Event('keypress', {key: 'Enter'}));
+        //     });
+        // }
     }
 
     input.on('keypress', function (event) {
@@ -218,7 +250,7 @@ $(document).ready(function () {
 
     increaseFontButton.on('click', function () {
         event.stopPropagation(); // Stop the event from
-        if (fontSize < 72) { // Prevent font size from getting too large
+        if (fontSize < 25) { // Prevent font size from getting too large
             fontSize++;
             terminal.css('font-size', fontSize + 'px');
             updateFontSizeDisplay();
