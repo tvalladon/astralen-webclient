@@ -153,18 +153,6 @@ $(document).ready(function () {
                 input.val(command).trigger($.Event('keypress', {key: 'Enter'}));
             });
         }
-
-        // const exits = _.get(data.match(/Exits: (.*)/), '[1]', null);
-        // if (exits) {
-        //     const directions = _.map(exits.match(/\[(.*?)\]/g), dir => dir.slice(1, -1));
-        //     directionsEl.html(_.map(directions.sort(), dir => `<a href="#" class="direction-link">${dir}</a>`).join(', '));
-        //
-        //     $('.direction-link').on('click', function (e) {
-        //         e.preventDefault();
-        //         const command = $(this).text();
-        //         input.val(command).trigger($.Event('keypress', {key: 'Enter'}));
-        //     });
-        // }
     }
 
     input.on('keypress', function (event) {
@@ -211,6 +199,7 @@ $(document).ready(function () {
     });
 
     commandButtons.on('click', function () {
+        event.stopPropagation();
         currentCommand = $(this).text();
         if (_.includes(modalCommands, currentCommand)) {
             inputModal.removeClass('hidden');

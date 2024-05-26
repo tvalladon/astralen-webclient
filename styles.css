@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0;
     font-family: monospace;
     background-color: #222;
@@ -103,11 +103,12 @@ body {
     color: #fff;
     padding: 0 10px;
     font-size: 20px;
+    right: 13px;
 }
 
 #popover {
     position: absolute;
-    bottom: 34px;
+    bottom: 43px;
     right: 0;
     background-color: #333;
     border: 1px solid #555;
