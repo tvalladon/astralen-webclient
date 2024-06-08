@@ -22,17 +22,17 @@ body {
 
 .flex-container {
     display: flex;
-    justify-content: space-between;  /* align children horizontally */
+    justify-content: space-between; /* align children horizontally */
     align-items: center; /* align children vertically */
 }
 
 #player-name,
-#room-name{
-    flex-basis: 33.33%;   /* each child will take up one third of the space */
-    text-align: center;   /* center the text within each child */
-    overflow: hidden;     /* prevents content from spilling over */
+#room-name {
+    flex-basis: 33.33%; /* each child will take up one third of the space */
+    text-align: center; /* center the text within each child */
+    overflow: hidden; /* prevents content from spilling over */
     text-overflow: ellipsis; /* ellipsis for overflowing text */
-    white-space: nowrap;  /* keeps text on a single line */
+    white-space: nowrap; /* keeps text on a single line */
     color: #fff !important;
 }
 
@@ -223,27 +223,31 @@ body {
     border: 1px solid #888;
     width: 33%;
 }
+
 #exits-bar {
     padding: 5px 10px;
     background-color: #333;
     color: #fff;
     text-align: center;
 }
-#exits a{
+
+#exits a {
     color: #fff !important;
 }
 
 .right-align {
-  margin-left: auto;
+    margin-left: auto;
 }
 
 #room-props {
     display: flex;
     flex-wrap: wrap;
+
     a {
         color: white !important;
     }
 }
+
 /*#room-props a:not(:last-child):after {*/
 /*    content: ",";*/
 /*}*/
